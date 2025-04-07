@@ -6,10 +6,10 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import cors from 'cors';
+import cors  from 'cors';
 import bodyParser from 'body-parser';
 import { typeDefs } from './schema/typeDefs';
-import { resolvers } from './schema/resolvers';
+import { resolvers } from './schema/Resolver';
 import { verifyGoogleToken } from './auth/google';
 
 dotenv.config();

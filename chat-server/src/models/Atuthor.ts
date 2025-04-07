@@ -1,4 +1,4 @@
-// src/models/Author.ts
+
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IAuthor extends Document {
