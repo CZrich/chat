@@ -3,14 +3,13 @@
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
 import { Layout } from '../Layouts/Layout';
 import { NoFound } from '../pages/NoFound';
-import { Login } from '../pages/Login';
+import {Login} from '../pages/Login';
 import { Chat } from '../pages/Chats';
+import { OAuthCallback } from '../components/OauthCallback';
 
-type Props = {
-  
-};
 
-export const Routes =(props: Props) =>{
+
+export const Routes =() =>{
 
   const route=createBrowserRouter([
 
@@ -21,8 +20,15 @@ export const Routes =(props: Props) =>{
         children:[
           {
             path:"login",
-            element:<Login/>
+            element:<Login></Login>
           },
+          
+          {
+
+            path:"/oauth/callback",
+            element:<OAuthCallback/>
+          }
+          ,
           {
 
             path:"chats",
