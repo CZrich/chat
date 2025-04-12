@@ -1,5 +1,5 @@
 
-import './App.css'
+
 import { Routes } from './routes/Paths'
 
 const App=()=> {

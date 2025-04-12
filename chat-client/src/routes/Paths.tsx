@@ -1,50 +1,32 @@
 
 
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
-import { Layout } from '../Layouts/Layout';
+//import { Layout } from '../Layouts/Layout';
 import { NoFound } from '../pages/NoFound';
-import {Login} from '../pages/Login';
 import { Chat } from '../pages/Chats';
-import { OAuthCallback } from '../components/OauthCallback';
+import { Welcome}  from '../pages/Welcome';
+
 
 
 
 export const Routes =() =>{
 
-  const route=createBrowserRouter([
-
-      {
-        path:"/",
-        element:<Layout/>,
-        errorElement:<NoFound/>,
-        children:[
-          {
-            path:"login",
-            element:<Login></Login>
-          },
-          
-          {
-
-            path:"/oauth/callback",
-            element:<OAuthCallback/>
-          }
-          ,
-          {
-
-            path:"chats",
-            element:<Chat></Chat>
-          }
-        ]
-      },
-      {
-
-        path:"*",
-        element:<NoFound></NoFound>
-      }
-
-
-
-  ])
+  const route = createBrowserRouter([
+    {
+      path: "/",
+      element: <Welcome />, // sin Layout
+    },
+    {
+      path: "chats",
+      element: <Chat/>,
+     
+    },
+    {
+      path: "*",
+      element: <NoFound />,
+    },
+  ]);
+  
   return (<RouterProvider router={route}>
       
   </RouterProvider>

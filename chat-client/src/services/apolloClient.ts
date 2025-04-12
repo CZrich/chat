@@ -1,44 +1,22 @@
-
-
-
 import { ApolloClient, InMemoryCache, HttpLink, split } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition } from '@apollo/client/utilities';
 //@ts-ignore
 import { createClient } from 'graphql-ws';
-import { authService } from '../services/authService';
 
 // HTTP link para queries y mutations
 const httpLink = new HttpLink({
   uri: 'http://localhost:4000/graphql',
 });
 
-// Auth link para añadir el token a las peticiones HTTP
-const authLink = setContext((_, { headers }) => {
-  const token = authService.getToken();
-  return {
-    headers: {
-      ...headers,
-      Authorization: token ? `Bearer ${token}` : '',
-    },
-  };
-});
-
-// WebSocket link para subscriptions
+// WebSocket link para subscriptions (sin token)
 const wsLink = new GraphQLWsLink(
   createClient({
     url: 'ws://localhost:4000/graphql',
-    connectionParams: () => {
-      const token = authService.getToken();
-      return {
-        authorization: token ? `Bearer ${token}` : '',
-      };
-    },
   })
 );
 
-// Split de tráfico basado en la operación
+// Split de tráfico: suscripciones por WebSocket, lo demás por HTTP
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
@@ -48,7 +26,7 @@ const splitLink = split(
     );
   },
   wsLink,
-  authLink.concat(httpLink)
+  httpLink
 );
 
 // Cliente Apollo

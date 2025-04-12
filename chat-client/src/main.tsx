@@ -4,24 +4,16 @@ import './index.css'
 import App from './App.tsx'
 import { ApolloProvider } from '@apollo/client'
 import { apolloClient } from './services/apolloClient.ts'
-import { AuthProvider } from './contex/AuthContex.tsx'
-import { GoogleOAuthProvider } from '@react-oauth/google'
+import {UserProvider} from './context/UserContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-
    
-
     <ApolloProvider client={apolloClient}>
-      <AuthProvider>
-
-     
+      <UserProvider>
       <App/>
-
-      </AuthProvider>
-      
+      </UserProvider>
     </ApolloProvider>
-    </GoogleOAuthProvider>
+    
   </StrictMode>,
 )
